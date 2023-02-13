@@ -5,6 +5,8 @@ Potential features :
 - Quote can be shared via Twitter
 - Background of application changes with each random generation
 
+Netlify deployment : https://63ea33767e30d20b2f9b89c1--famous-marzipan-7f7d23.netlify.app
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
