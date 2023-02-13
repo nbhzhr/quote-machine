@@ -13,7 +13,16 @@
   }
 }
 
-.App-header {
+#new-quote {
+  background-color: white;
+}
+
+#tweet-quote {
+  background-color: lightblue;
+  width:7rem;
+}
+
+.wrapper {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

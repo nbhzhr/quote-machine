@@ -8,31 +8,46 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quote: 'Click for a new quote',
-      author: '...'
+      quote: '',
+      author: ''
     };
     this.handleClick = this.handleClick.bind(this);
+    this.fetchQuote = this.fetchQuote.bind(this);
+  }
+
+  fetchQuote = () => {
+    fetch(APIURL)
+      .then((data) => data.json())
+      .then((item) => {
+        this.setState({
+          quote: item.quote,
+          author: item.author
+        })
+      });
+  }
+
+  componentDidMount() {
+    this.fetchQuote();
   }
 
   handleClick = () => {
-    fetch(APIURL)
-    .then((data) => data.json())
-    .then((item) => {
-      this.setState({
-        quote: item.quote,
-        author: item.author
-      })
-    });
+    this.fetchQuote();
   }
 
   render(){
     return(
-      <div class="wrapper">
-        <div class="container" id="quote-box">
-          <h3 id="text">{this.state.quote}</h3>
+      <div className="wrapper container-fluid">
+        <div className="container" id="quote-box">
+          <h3 id="text"><em>{this.state.quote}</em></h3>
           <h4 id="author">{this.state.author}</h4>
-          <button id="new-quote" onClick={this.handleClick}>Click for more</button>
-          <a href="twitter.com/intent/tweet" id="tweet-quote">Tweet</a>
+          <div className="row">
+            <div className="col-auto mr-auto">
+              <button id="new-quote" onClick={this.handleClick} className="btn btn-default">New Quote</button>
+            </div>
+            <div className="col-auto mr-auto">
+              <a href="twitter.com/intent/tweet" id="tweet-quote" className="btn btn-default">Tweet</a>
+            </div>
+          </div>
         </div>
       </div>
     )
