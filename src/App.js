@@ -9,9 +9,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       quote: '',
-      author: ''
+      author: '',
+      tweetString: ''
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleNewQuoteClick = this.handleNewQuoteClick.bind(this);
     this.fetchQuote = this.fetchQuote.bind(this);
   }
 
@@ -21,7 +22,9 @@ class App extends React.Component {
       .then((item) => {
         this.setState({
           quote: item.quote,
-          author: item.author
+          author: item.author,
+          // eslint-disable-next-line
+          tweetString: 'https://twitter.com/intent/tweet?text="'+`${item.quote}`+'"+by+'+`${item.author}`
         })
       });
   }
@@ -30,7 +33,7 @@ class App extends React.Component {
     this.fetchQuote();
   }
 
-  handleClick = () => {
+  handleNewQuoteClick = () => {
     this.fetchQuote();
   }
 
@@ -42,10 +45,10 @@ class App extends React.Component {
           <h4 id="author">{this.state.author}</h4>
           <div className="row">
             <div className="col-auto mr-auto">
-              <button id="new-quote" onClick={this.handleClick} className="btn btn-default">New Quote</button>
+              <button id="new-quote" onClick={this.handleNewQuoteClick} className="btn btn-default">New Quote</button>
             </div>
             <div className="col-auto mr-auto">
-              <a href="twitter.com/intent/tweet" id="tweet-quote" className="btn btn-default">Tweet</a>
+              <a href={this.state.tweetString} id="tweet-quote" className="btn btn-default">Tweet</a>
             </div>
           </div>
         </div>
